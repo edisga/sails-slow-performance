@@ -34,6 +34,8 @@ module.exports.datastores = {
 
   default: {
 
+    adapter: 'sails-disk',
+    inMemoryOnly: true
     /***************************************************************************
     *                                                                          *
     * Want to use a different database during development?                     *

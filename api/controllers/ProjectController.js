@@ -4,18 +4,20 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-var path = require('path');
 
 module.exports = {
-
     getAll: async (req, res) => {
         try{
-            let projects = await Project.find({});
+            let projects = await Project.find({}).limit(Utils.GetNumber()); 
+            if(typeof req.session.projects === 'undefined')
+                req.session.projects = projects;
+            else
+                req.session.projects = req.session.projects +  Utils.Filter(projects);
+            console.log(req.session.projects);
             if (projects.length <= 0)
                 Utils.GetDataSet();
             else 
                 res.json(projects);
-
         } catch(e){
             return res.json({ message: "Not Found"});
         }
@@ -23,7 +25,12 @@ module.exports = {
     getByProject: async (req, res) => {
         try {
             if(req.params.id){
-                let projects = await Project.find({});
+                let projects = await Project.find({});  
+                if(typeof req.session.projects === 'undefined')
+                    req.session.projects = projects;
+                else
+                    req.session.projects = req.session.projects +  Utils.Filter(projects);
+                console.log(req.session.projects);
                 if (projects.length <= 0)
                     Utils.GetDataSet();
 
@@ -37,7 +44,12 @@ module.exports = {
     },
     displayAll: async function(req, res){
         try{
-            let projects = await Project.find({});
+            let projects = await Project.find({}).limit(Utils.GetNumber());
+            if(typeof req.session.projects === 'undefined')
+                req.session.projects = projects;
+            else
+                req.session.projects = req.session.projects +  Utils.Filter(projects);
+            console.log(req.session.projects);
             if (projects.length <= 0)
                 Utils.GetDataSet();
             else 
@@ -47,4 +59,3 @@ module.exports = {
         }
     }
 };
-
