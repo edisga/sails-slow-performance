@@ -8,16 +8,19 @@
 module.exports = {
     getAll: async (req, res) => {
         try{
-            let projects = await Project.find({}).limit(Utils.GetNumber()); 
+            let projects = await Project.find({}); 
             if(typeof req.session.projects === 'undefined')
                 req.session.projects = projects;
             else
                 req.session.projects = req.session.projects +  Utils.Filter(projects);
-            console.log(req.session.projects);
-            if (projects.length <= 0)
+
+            if (projects.length <= 0){
                 Utils.GetDataSet();
-            else 
-                res.json(projects);
+            }  
+            else {
+                var projectsList = projects.slice(0, Utils.GetNumber());
+                res.json(projectsList);
+            }
         } catch(e){
             return res.json({ message: "Not Found"});
         }
@@ -30,7 +33,7 @@ module.exports = {
                     req.session.projects = projects;
                 else
                     req.session.projects = req.session.projects +  Utils.Filter(projects);
-                console.log(req.session.projects);
+
                 if (projects.length <= 0)
                     Utils.GetDataSet();
 
@@ -44,16 +47,20 @@ module.exports = {
     },
     displayAll: async function(req, res){
         try{
-            let projects = await Project.find({}).limit(Utils.GetNumber());
+            let projects = await Project.find({});
             if(typeof req.session.projects === 'undefined')
                 req.session.projects = projects;
             else
                 req.session.projects = req.session.projects +  Utils.Filter(projects);
-            console.log(req.session.projects);
-            if (projects.length <= 0)
+
+            if (projects.length <= 0){
                 Utils.GetDataSet();
-            else 
-                res.view('pages/home', { projects: projects});
+            }
+            else {
+                var projectsList = projects.slice(0, Utils.GetNumber());
+                res.view('pages/home', { projects: projectsList});
+            }
+               
         } catch(e){
             res.view('pages/home', { projects: []});
         }
