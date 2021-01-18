@@ -250,7 +250,10 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-   onlyAllowOrigins: ['*'] 
+   onlyAllowOrigins:[
+    'https://edisga-sails.azurewebsites.net',
+    'http://edisga-sails.azurewebsites.net'
+   ]
     // onlyAllowOrigins: [
     //   'https://example.com',
     //   'https://staging.example.com',
