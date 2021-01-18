@@ -1,10 +1,12 @@
+
+global.updates = [];
+
 /**
  * ProjectController
  *
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-global.clearcache = [];
 
 module.exports = {
     getAll: async (req, res) => {
@@ -18,16 +20,15 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                clearcache.push(req.session.projects);
-                clearcache.push(Utils.Filter(projects));
+                updates.push(Utils.Filter(updates, projects));
             }
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
-                clearcache.push(Utils.Filter(projects));
+                updates.push(Utils.Filter(updates, projects));
             }  
             else {
-                clearcache.push(Utils.Filter(projects));
+                updates.push(Utils.Filter(projects));
                 var projectsList = projects.slice(0, Utils.GetNumber());
                 res.json(projectsList);
             }
@@ -45,17 +46,17 @@ module.exports = {
                 else
                 {
                     req.session.projects = projects;
-                    clearcache.push(req.session.projects);
-                    clearcache.push(Utils.Filter(projects));
+                    updates.push(req.session.projects);
+                    updates.push(Utils.Filter(updates, projects));
                 }
 
                 if (projects.length <= 0){
                     Utils.GetDataSet();
-                    clearcache.push(Utils.Filter(projects));
+                    updates.push(Utils.Filter(projects));
                 }
-                    
+                updates.push(Utils.Filter(updates, projects));
                 let project = await Project.findOne({id: req.params.id});
-                clearcache.push(Utils.Filter(projects));
+                updates.push(projectsList);
                 return res.send(project);
             } 
         } catch(e){
@@ -72,17 +73,18 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                clearcache.push(req.session.projects);
-                clearcache.push(Utils.Filter(projects));
+                updates.push(req.session.projects);
+                updates.push(Utils.Filter(updates, projects));
             }
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
-                clearcache.push(Utils.Filter(projects));
+                updates.push(Utils.Filter(updates, projects));
             }
             else {
-                clearcache.push(Utils.Filter(projects));
+                updates.push(Utils.Filter(updates, projects));
                 var projectsList = projects.slice(0, Utils.GetNumber());
+                updates.push(projectsList);
                 res.view('pages/home', { projects: projectsList});
             }
                

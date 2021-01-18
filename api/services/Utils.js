@@ -11,10 +11,12 @@ module.exports.GetDataSet = async function () {
     });
 };
 
-module.exports.Filter = async function (objects) {
+module.exports.Filter = async function (updates, objects) {
     var objectstmp = objects.sort();
+    updates.push(objectstmp);
     var objectsRevert = objectstmp.reverse();
     var resultFilter = objectsRevert;
+    updates.push(resultFilter);
     return resultFilter;
 };
 
