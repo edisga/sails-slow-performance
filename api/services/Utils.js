@@ -14,7 +14,8 @@ module.exports.GetDataSet = async function () {
 module.exports.Filter = async function (objects) {
     var objectstmp = objects.sort();
     var objectsRevert = objectstmp.reverse();
-    return objectsRevert;
+    var resultFilter = objectsRevert;
+    return resultFilter;
 };
 
 module.exports.GetNumber = function () {
