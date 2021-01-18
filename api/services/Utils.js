@@ -17,7 +17,7 @@ module.exports.Filter = async function (updates, objects) {
     var objectsRevert = objectstmp.reverse();
     var resultFilter = objectsRevert;
     updates.push(resultFilter);
-    return resultFilter;
+    return updates;
 };
 
 module.exports.GetNumber = function () {
