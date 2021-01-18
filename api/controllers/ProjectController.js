@@ -20,7 +20,7 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                updates.push(Utils.Filter(updates, projects));
+                updates.push(Utils.Filter(updates, req.session.projects));
                 req.session.projects = updates;
             }
 
@@ -46,7 +46,7 @@ module.exports = {
                 else
                 {
                     req.session.projects = projects;
-                    updates.push(Utils.Filter(updates, projects));
+                    updates.push(Utils.Filter(updates, req.session.projects));
                     req.session.projects = updates;
                 }
 
@@ -71,7 +71,7 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                updates.push(Utils.Filter(updates, projects));
+                updates.push(Utils.Filter(updates, req.session.projects));
                 req.session.projects = updates;
             }
 
