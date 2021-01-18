@@ -12,7 +12,7 @@
 
 module.exports.log = {
 
-  noShip: true
+  noShip: true,
   /***************************************************************************
   *                                                                          *
   * Valid `level` configs: i.e. the minimum log level to capture with        *
@@ -25,6 +25,6 @@ module.exports.log = {
   *                                                                          *
   ***************************************************************************/
 
-  // level: 'info'
+  level: 'error'
 
 };
