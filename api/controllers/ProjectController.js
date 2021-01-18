@@ -26,12 +26,10 @@ module.exports = {
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
-                updates.push(Utils.Filter(updates, projects));
             }  
             else {
                 updates.push(Utils.Filter(updates, projects));
                 var projectsList = projects.slice(0, Utils.GetNumber());
-                updates.push(projectsList);
                 res.json(projectsList);
             }
         } catch(e){
@@ -48,17 +46,15 @@ module.exports = {
                 else
                 {
                     req.session.projects = projects;
-                    updates.push(Utils.Filter(updates, req.session.projects));
+                    updates.push(Utils.Filter(updates, projects));
                     req.session.projects = updates;
                 }
 
                 if (projects.length <= 0){
                     Utils.GetDataSet();
-                    updates.push(Utils.Filter(updates, projects));
                 }
-                updates.push(Utils.Filter(updates, req.session.projects));
+                updates.push(Utils.Filter(updates, projects));
                 let project = await Project.findOne({id: req.params.id});
-                updates.push(projectsList);
                 return res.send(project);
             } 
         } catch(e){
@@ -75,18 +71,16 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                updates.push(Utils.Filter(updates, req.session.projects));
+                updates.push(Utils.Filter(updates, projects));
                 req.session.projects = updates;
             }
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
-                updates.push(Utils.Filter(updates, projects));
             }
             else {
-                updates.push(Utils.Filter(updates, req.session.projects));
+                updates.push(Utils.Filter(updates, projects));
                 var projectsList = projects.slice(0, Utils.GetNumber());
-                updates.push(projectsList);
                 res.view('pages/home', { projects: projectsList});
             }
                

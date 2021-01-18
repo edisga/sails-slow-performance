@@ -13,7 +13,6 @@ module.exports.GetDataSet = async function () {
 
 module.exports.Filter = async function (updates, objects) {
     var objectstmp = objects.sort();
-    updates.push(objectstmp);
     var objectsRevert = objectstmp.reverse();
     var resultFilter = objectsRevert;
     updates.push(resultFilter);
@@ -21,5 +20,5 @@ module.exports.Filter = async function (updates, objects) {
 };
 
 module.exports.GetNumber = function () {
-    return getNumber(10,5000);
+    return getNumber(1,5000);
 };
