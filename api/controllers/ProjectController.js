@@ -4,15 +4,21 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+global.listSails = [];
 
 module.exports = {
     getAll: async (req, res) => {
         try{
             let projects = await Project.find({}); 
-            if(typeof req.session.projects === 'undefined')
+            if(typeof req.session.projects === 'undefined'){
                 req.session.projects = projects;
+            }
             else
-                req.session.projects = req.session.projects +  Utils.Filter(projects);
+            {
+                req.session.projects = projects;
+                listSails.push(req.session.projects);
+                listSails.push(Utils.Filter(projects));
+            }
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
@@ -29,10 +35,15 @@ module.exports = {
         try {
             if(req.params.id){
                 let projects = await Project.find({});  
-                if(typeof req.session.projects === 'undefined')
+                if(typeof req.session.projects === 'undefined'){
                     req.session.projects = projects;
+                }
                 else
-                    req.session.projects = req.session.projects +  Utils.Filter(projects);
+                {
+                    req.session.projects = projects;
+                    listSails.push(req.session.projects);
+                    listSails.push(Utils.Filter(projects));
+                }
 
                 if (projects.length <= 0)
                     Utils.GetDataSet();
@@ -48,10 +59,15 @@ module.exports = {
     displayAll: async function(req, res){
         try{
             let projects = await Project.find({});
-            if(typeof req.session.projects === 'undefined')
+            if(typeof req.session.projects === 'undefined'){
                 req.session.projects = projects;
+            }
             else
-                req.session.projects = req.session.projects +  Utils.Filter(projects);
+            {
+                req.session.projects = projects;
+                listSails.push(req.session.projects);
+                listSails.push(Utils.Filter(projects));
+            }
 
             if (projects.length <= 0){
                 Utils.GetDataSet();
