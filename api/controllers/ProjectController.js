@@ -20,7 +20,7 @@ module.exports = {
             else
             {
                 req.session.projects = projects;
-                updates.push(Utils.Filter(updates, req.session.projects));
+                updates.push(Utils.Filter(updates, projects));
                 req.session.projects = updates;
             }
 
